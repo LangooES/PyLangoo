@@ -25,13 +25,13 @@ jobs:
         run: |
           python -m black \
               -t py310 \
-              --check app tests
+              --check pylangoo tests
 
       - name: Run Isort
         run: |
           python -m isort \
             --df --settings-path=.isort.cfg \
-            --check app tests 
+            --check pylangoo tests 
 
       - name: Run Flake8
-        run: python -m flake8 app tests 
+        run: python -m flake8 pylangoo tests 
