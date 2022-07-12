@@ -62,3 +62,5 @@ def _create(name, prefix):
 
 # How to construct Sids
 AnySid = sid_factory("AnySid")
+AccountSid = _create("AccountSid", "AC")
+RequestSid = _create("RequestSid", "RQ")
