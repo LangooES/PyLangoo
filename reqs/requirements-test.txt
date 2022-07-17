@@ -1,9 +1,3 @@
-# Core
-pip==22.1.2
-setuptools==62.6.0
-wheel==0.37.1
-pydantic==1.9.1
-
 # Testing
 pytest==7.1.2
 pytest-cov==3.0.0

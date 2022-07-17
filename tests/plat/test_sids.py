@@ -3,8 +3,8 @@ import random
 import pytest
 from pydantic.errors import PydanticValueError
 
-from pylangoo.plat import sids
-from pylangoo.plat.sids import sid_factory
+from pylangoo.core import sids
+from pylangoo.core.sids import sid_factory
 
 
 def get_random_sid(exclude=None):

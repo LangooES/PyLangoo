@@ -52,8 +52,10 @@ class BaseHTTPClient:
             host (str): client host (e.g. localhost)
             port (int): client port
         """
-        if not host.startswith("http://"):
+        if not any(host.startswith(prefix) for prefix in ["http://", "https://"]):
             host = "http://" + host
+        else:
+            prefix = "https://" if "https://" in host else "http://"
         self.base_url = "{}:{}".format(host, port)
 
         # Define a request session and configure it so that all outbound http
@@ -62,7 +64,7 @@ class BaseHTTPClient:
         retry_strategy = Retry(
             total=5, backoff_factor=0.1, status_forcelist=[502, 503, 504]
         )
-        self.sess.mount("http://", HTTPAdapter(max_retries=retry_strategy))
+        self.sess.mount(prefix, HTTPAdapter(max_retries=retry_strategy))
 
     def do_request(
         self,

@@ -29,7 +29,9 @@ check $(PYTHON):
 install:
 	@echo "Installing full environment locally into the virtualenv"
 	$(PIP) install -e .[all]
-	$(PIP) install -r requirements.txt
+	$(PIP) install -r reqs/requirements.txt
+	$(PIP) install -r reqs/requirements-test.txt
+	$(PIP) install -r reqs/requirements-nb.txt
 
 .PHONY: lint
 lint:
