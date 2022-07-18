@@ -108,12 +108,17 @@ class CertificationsClient(BaseHTTPClient):
 
         @staticmethod
         def create(
-            name: str,
+            language_id: int,
             certification_id: int,
+            name: str,
         ):
             """Admin API - Create certification_level"""
             url = CertificationsClient.CERTIFICATION_LEVELS_URI
-            params = {"name": name, "certification_id": certification_id}
+            params = {
+                "name": name,
+                "language_id": language_id,
+                "certification_id": certification_id,
+            }
             return CertificationsClient().do_request(
                 method="POST",
                 url=url,
@@ -148,10 +153,20 @@ class CertificationsClient(BaseHTTPClient):
             )
 
         @staticmethod
-        def create(name: str):
+        def create(
+            language_id: str,
+            certification_id: int,
+            certification_level_id: int,
+            name: str,
+        ):
             """Admin API - Create certification_competence"""
             url = CertificationsClient.COMPETENCE_URI
-            params = {"name": name}
+            params = {
+                "name": name,
+                "language_id": language_id,
+                "certification_id": certification_id,
+                "certification_level_id": certification_level_id,
+            }
             return CertificationsClient().do_request(
                 method="POST",
                 url=url,
@@ -170,3 +185,43 @@ class CertificationsClient(BaseHTTPClient):
                 url=url,
                 operation_name="get-competence",
             )
+
+
+class ExercisesClient(BaseHTTPClient):
+    BASE_URI = "https://x8ki-letl-twmt.n7.xano.io/api:qxYWdwtk"
+    EXERCISES_URI = f"{BASE_URI}/exercises"
+
+    def __init__(self, host=BASE_URI, port=80):
+        super().__init__(host, port)
+
+    @staticmethod
+    def list():
+        """Admin API - Get list of exams"""
+        url = CertificationsClient.CERTIFICATIONS_URI
+        return CertificationsClient().do_request(
+            method="GET",
+            url=url,
+            operation_name="list-certifications",
+        )
+
+    def create(name: str, language_id: int):
+        """Admin API - Create certification"""
+        url = CertificationsClient.CERTIFICATIONS_URI
+        params = {"name": name, "language_id": language_id}
+        return CertificationsClient().do_request(
+            method="POST",
+            url=url,
+            operation_name="create-certification",
+            params=params,
+        )
+
+    def get(
+        certification_id: int,
+    ):
+        """Admin API - Get certification by id"""
+        url = CertificationsClient.CERTIFICATIONS_URI + f"/{certification_id}"
+        return CertificationsClient().do_request(
+            method="GET",
+            url=url,
+            operation_name="get-certification",
+        )
