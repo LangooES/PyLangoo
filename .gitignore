@@ -123,3 +123,5 @@ cli/.cli-venv
 # Experimental
 # TODO: uncomment when moving to prod
 #experimental/
+
+pylangoo/clients/certifications_client
