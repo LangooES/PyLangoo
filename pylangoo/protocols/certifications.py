@@ -27,3 +27,4 @@ class Competence(BaseModel):
     certification_id: int
     certification_level_id: int
     name: Literal["reading", "writing", "speaking", "listening"]
+    display_name: str

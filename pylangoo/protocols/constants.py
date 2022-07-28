@@ -50,3 +50,19 @@ COMPETENCE_LEVEL_TYPES = {
     Competence.SPEAKING: {"any-level": 4},
     Competence.LISTENING: {"any-level": 5},
 }
+
+# What the front-end should display as the name for each competence
+COMPETENECES_DISPLAY_NAME = {
+    Certification.CAMBRIDGE: {
+        Competence.READING: "reading",
+        Competence.WRITING: "writing",
+        Competence.SPEAKING: "speaking",
+        Competence.LISTENING: "listening",
+    },
+    Certification.DELE: {
+        Competence.READING: "comprensión lectora",
+        Competence.WRITING: "expresión e interacción escrita",
+        Competence.SPEAKING: "expresión e interacción oral",
+        Competence.LISTENING: "comprensión auditiva",
+    },
+}

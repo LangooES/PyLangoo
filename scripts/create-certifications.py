@@ -5,9 +5,13 @@ from pylangoo.protocols.certifications import (
     Competence,
     Language,
 )
-from pylangoo.protocols.constants import CERTIFICATION_LEVELS, CERTIFICATION_COMPETENCES
+from pylangoo.protocols.constants import (
+    CERTIFICATION_LEVELS,
+    CERTIFICATION_COMPETENCES,
+    COMPETENECES_DISPLAY_NAME,
+    LANGUAGE_CERTIFICATIONS,
+)
 from pylangoo.protocols.constants import Language as LanguageEnum
-from pylangoo.protocols.constants import LANGUAGE_CERTIFICATIONS
 
 
 def extract_field_values(ls: list[dict], key: str):
@@ -89,7 +93,11 @@ def create_cert_level_if_not_exists(
 
 
 def create_competence_if_not_exists(
-    language_id: int, certification_id: int, certification_level_id: int, name: str
+    language_id: int,
+    certification_id: int,
+    certification_level_id: int,
+    name: str,
+    display_name: str,
 ):
     db_competences = client.Competences.list()
 
@@ -108,11 +116,12 @@ def create_competence_if_not_exists(
             certification_id=certification_id,
             certification_level_id=certification_level_id,
             name=name,
+            display_name=display_name,
         )
         print("===> Created")
         return CertificationLevel(**new_competence)
 
-    print(f"Competecence already exists")
+    print("===> Competecence already exists")
     new_competence = client.Competences.get(competence_id=competence_id)
     return Competence(**new_competence)
 
@@ -163,6 +172,7 @@ for language in LanguageEnum:
                     certification_id=db_cert.id,
                     certification_level_id=db_cert_level.id,
                     name=compentece,
+                    display_name=COMPETENECES_DISPLAY_NAME[certification][compentece],
                 )
 
 

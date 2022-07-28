@@ -158,6 +158,7 @@ class CertificationsClient(BaseHTTPClient):
             certification_id: int,
             certification_level_id: int,
             name: str,
+            display_name: str,
         ):
             """Admin API - Create certification_competence"""
             url = CertificationsClient.COMPETENCE_URI
@@ -166,6 +167,7 @@ class CertificationsClient(BaseHTTPClient):
                 "language_id": language_id,
                 "certification_id": certification_id,
                 "certification_level_id": certification_level_id,
+                "display_name": display_name,
             }
             return CertificationsClient().do_request(
                 method="POST",
